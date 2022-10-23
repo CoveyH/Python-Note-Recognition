@@ -9,23 +9,28 @@ e="e"
 f="f"
 g="g"
 
+count = 0
 note = [a,b,c,d,e,f,g]
 
+test = random.sample(note, k=len(note))
 
-question = False
-
-while True:
-
+def generate_notes():
     test = random.sample(note, k=len(note))
 
+while True:
+    if count == 7:
+        generate_notes()
+        count = 0
     for x in test:
-        print ("What note is this: ", x)
-        answer=input()
-        if answer == x:
-            print ("True")
-            continue
-        else:
-            print("False")
-            question = False
-            break
-        
+        answered = False
+        while answered == False:
+            print ("What note is this: ", x)
+            answer=input()
+            if answer == x:
+                print ("Correct!")
+                count += 1
+                answered == True
+                break
+            else:
+                print("False")
+                continue
